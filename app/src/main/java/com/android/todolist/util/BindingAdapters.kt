@@ -25,6 +25,29 @@ fun setPriority(view: TextView, priority: Int){
     }
 }
 
+@SuppressLint("SetTextI18n")
+@BindingAdapter("setType")
+fun setType(view: TextView, priority: Int){
+    when(priority){
+        0 -> {
+            view.text = "Work"
+            view.setTextColor(Color.RED)
+        }
+        1 -> {
+            view.text = "Study"
+            view.setTextColor(Color.BLUE)
+        }
+        2 -> {
+            view.text = "Exercise"
+            view.setTextColor(Color.YELLOW)
+        }
+        else -> {
+            view.text = "Parenting"
+            view.setTextColor(Color.GREEN)
+        }
+    }
+}
+
 @BindingAdapter("setTimestamp")
 fun setTimestamp(view: TextView, timestamp: Long){
     view.text = DateFormat.getInstance().format(timestamp)

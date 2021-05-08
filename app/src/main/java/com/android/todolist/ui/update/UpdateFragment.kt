@@ -31,6 +31,7 @@ class UpdateFragment : Fragment() {
         binding.apply {
             updateEdtTask.setText(args.taskEntry.title)
             updateSpinner.setSelection(args.taskEntry.priority)
+            updateType.setSelection(args.taskEntry.type)
 
             btnUpdate.setOnClickListener {
                 if(TextUtils.isEmpty(updateEdtTask.text)){
@@ -40,11 +41,13 @@ class UpdateFragment : Fragment() {
 
                 val task_str = updateEdtTask.text
                 val priority = updateSpinner.selectedItemPosition
+                val type = updateType.selectedItemPosition
 
                 val taskEntry = TaskEntry(
                     args.taskEntry.id,
                     task_str.toString(),
                     priority,
+                    type,
                     args.taskEntry.timestamp
                 )
 

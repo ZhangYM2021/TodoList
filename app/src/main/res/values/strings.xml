@@ -13,4 +13,10 @@
         <item>Medium Priority</item>
         <item>Low Priority</item>
     </string-array>
+    <string-array name="types">
+        <item>Work</item>
+        <item>Study</item>
+        <item>Exercise</item>
+        <item>Parenting</item>
+    </string-array>
 </resources>

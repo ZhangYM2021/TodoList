@@ -43,11 +43,13 @@ class AddFragment : Fragment() {
 
                 val title_str = edtTask.text.toString()
                 val priority = spinner.selectedItemPosition
+                val type = type.selectedItemPosition
 
                 val taskEntry = TaskEntry(
                     0,
                     title_str,
                     priority,
+                    type,
                     System.currentTimeMillis()
                 )
 
