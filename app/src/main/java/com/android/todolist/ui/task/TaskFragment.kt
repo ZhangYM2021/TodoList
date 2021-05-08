@@ -78,7 +78,15 @@ class TaskFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        hideKeyboard(requireActivity())
+
         return binding.root
+    }
+
+    private fun hideKeyboard(activity: Activity){
+        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocusedView = activity.currentFocus
+        inputMethodManager.hideSoftInputFromWindow(currentFocusedView?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
 
