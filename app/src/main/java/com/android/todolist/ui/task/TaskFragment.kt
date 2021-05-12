@@ -2,6 +2,7 @@ package com.android.todolist.ui.task
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.todolist.ui.task.TaskFragmentDirections
 import com.android.todolist.R
 import com.android.todolist.databinding.FragmentTaskBinding
+import com.android.todolist.databinding.RowLayoutBinding
 import com.android.todolist.viewmodel.TaskViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -37,7 +39,9 @@ class TaskFragment : Fragment() {
 
         adapter = TaskAdapter(TaskClickListener { taskEntry ->
             findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToUpdateFragment(taskEntry))
-        })
+        }) { taskEntry ->
+            viewModel.delete(taskEntry)
+        }
 
         viewModel.getAllTasks.observe(viewLifecycleOwner){
             adapter.submitList(it)
