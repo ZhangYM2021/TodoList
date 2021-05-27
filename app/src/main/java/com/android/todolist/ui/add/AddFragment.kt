@@ -35,6 +35,9 @@ class AddFragment : Fragment() {
 
         binding.apply {
             spinner.adapter = myAdapter
+            floatingActionButton.setOnClickListener {
+                findNavController().navigate(R.id.action_addFragment_to_timePickerFragment)
+            }
             btnAdd.setOnClickListener {
                 if(TextUtils.isEmpty((edtTask.text))){
                     Toast.makeText(requireContext(), "It's empty!", Toast.LENGTH_SHORT).show()
