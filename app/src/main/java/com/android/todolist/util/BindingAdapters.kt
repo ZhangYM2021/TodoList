@@ -27,8 +27,8 @@ fun setPriority(view: TextView, priority: Int){
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("setType")
-fun setType(view: TextView, priority: Int){
-    when(priority){
+fun setType(view: TextView, type: Int){
+    when(type){
         0 -> {
             view.text = "Work"
             view.setTextColor(Color.RED)

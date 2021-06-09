@@ -65,4 +65,8 @@
             android:id="@+id/action_timePickerFragment_to_addFragment"
             app:destination="@id/addFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/deletedFragment"
+        android:name="com.android.todolist.ui.task.DeletedFragment"
+        android:label="DeletedFragment" />
 </navigation>

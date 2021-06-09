@@ -16,11 +16,13 @@ class TaskViewModel(application: Application) : AndroidViewModel(application){
     private val repository : TaskRepository
 
     val getAllTasks: LiveData<List<TaskEntry>>
+    val getDeletedTasks: LiveData<List<TaskEntry>>
     val getAllPriorityTasks: LiveData<List<TaskEntry>>
 
     init {
         repository = TaskRepository(taskDao)
         getAllTasks = repository.getAllTasks()
+        getDeletedTasks = repository.getDeletedTasks()
         getAllPriorityTasks = repository.getAllPriorityTasks()
     }
 

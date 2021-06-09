@@ -61,13 +61,12 @@
             app:layout_constraintTop_toBottomOf="@+id/type" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/btn_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
-            android:onClick="showTimePickerDialog"
             android:src="@drawable/ic_alarm"
             app:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"

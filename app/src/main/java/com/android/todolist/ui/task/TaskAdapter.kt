@@ -1,5 +1,6 @@
 package com.android.todolist.ui.task
 
+import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.android.todolist.R
 import com.android.todolist.database.TaskEntry
 import com.android.todolist.databinding.RowLayoutBinding
 import com.android.todolist.viewmodel.TaskViewModel
+import com.bumptech.glide.Glide
 
 class TaskAdapter(private val clickListener: TaskClickListener, val deleteListener: (taskEntry: TaskEntry) -> Unit) : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallback) {
 
@@ -25,6 +28,22 @@ class TaskAdapter(private val clickListener: TaskClickListener, val deleteListen
             binding.taskEntry = taskEntry
             binding.clickListener = clickListener
             binding.executePendingBindings()
+            binding.apply {
+                when (taskType.text) {
+                    "Work" -> {
+                        Glide.with(itemView).load(R.drawable.ic_work).into(imageView)
+                    }
+                    "Study" -> {
+                        Glide.with(itemView).load(R.drawable.ic_study).into(imageView)
+                    }
+                    "Exercise" -> {
+                        Glide.with(itemView).load(R.drawable.ic_exercise).into(imageView)
+                    }
+                    "Parenting" -> {
+                        Glide.with(itemView).load(R.drawable.ic_parenting).into(imageView)
+                    }
+                }
+            }
         }
     }
 
@@ -41,6 +60,7 @@ class TaskAdapter(private val clickListener: TaskClickListener, val deleteListen
                 holder.binding.apply {
                     if (isChecked) {
                         deleteListener(current)
+                        //taskEntry.deleted = true
                         taskTitle.paintFlags =
                                 taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 

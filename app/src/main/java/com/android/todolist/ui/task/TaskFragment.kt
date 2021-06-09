@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.android.todolist.ui.task.TaskFragmentDirections
 import com.android.todolist.R
+import com.android.todolist.database.TaskEntry
 import com.android.todolist.databinding.FragmentTaskBinding
 import com.android.todolist.databinding.RowLayoutBinding
 import com.android.todolist.viewmodel.TaskViewModel
@@ -69,11 +70,13 @@ class TaskFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val taskEntry = adapter.currentList[position]
-                viewModel.delete(taskEntry)
+                taskEntry.deleted = true
+                viewModel.update(taskEntry)
 
                 Snackbar.make(binding.root, "Deleted!", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo"){
                         viewModel.insert(taskEntry)
+                        taskEntry.deleted = false
                     }
                     show()
                 }

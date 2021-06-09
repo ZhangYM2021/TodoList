@@ -13,5 +13,6 @@ data class TaskEntry(
     var title: String,
     var priority: Int,
     var type: Int,
-    var timestamp: Long
+    var timestamp: Long,
+    var deleted: Boolean = false
 ) : Parcelable

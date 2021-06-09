@@ -48,7 +48,8 @@ class UpdateFragment : Fragment() {
                     task_str.toString(),
                     priority,
                     type,
-                    args.taskEntry.timestamp
+                    args.taskEntry.timestamp,
+                    deleted = false
                 )
 
                 viewModel.update(taskEntry)
