@@ -13,11 +13,13 @@ import com.android.todolist.R
 import com.android.todolist.database.TaskEntry
 import com.android.todolist.databinding.FragmentUpdateBinding
 import com.android.todolist.viewmodel.TaskViewModel
+import java.util.*
 
 
 class UpdateFragment : Fragment() {
 
     private val viewModel: TaskViewModel by viewModels()
+    private val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +44,8 @@ class UpdateFragment : Fragment() {
                 val task_str = updateEdtTask.text
                 val priority = updateSpinner.selectedItemPosition
                 val type = updateType.selectedItemPosition
+                val AlarmTime = "${calendar.get(Calendar.YEAR)}.${calendar.get(Calendar.MONTH) + 1}" +
+                        ".${calendar.get(Calendar.DAY_OF_MONTH)} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
 
                 val taskEntry = TaskEntry(
                     args.taskEntry.id,
@@ -49,7 +53,9 @@ class UpdateFragment : Fragment() {
                     priority,
                     type,
                     args.taskEntry.timestamp,
-                    deleted = false
+                    deleted = false,
+                    destroyed = false,
+                    AlarmTime
                 )
 
                 viewModel.update(taskEntry)

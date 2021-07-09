@@ -9,4 +9,8 @@
         android:id="@+id/deletedFragment"
         android:icon="@drawable/ic_deleted"/>
 
+    <item android:title="Destroyed"
+        android:id="@+id/destroyedFragment"
+        android:icon="@drawable/ic_destroyed"/>
+
 </menu>

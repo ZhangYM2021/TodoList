@@ -27,6 +27,12 @@ interface TaskDao {
     @Query("select * from task_table where title like :searchQuery order by timestamp desc")
     fun searchDatabase(searchQuery: String): LiveData<List<TaskEntry>>
 
+    @Query("select * from task_table order by alarmTime desc")
+    fun timeOrder(): LiveData<List<TaskEntry>>
+
     @Query("select * from task_table where deleted = 1")
     fun getDeletedTasks(): LiveData<List<TaskEntry>>
+
+    @Query("select * from task_table where destroyed = 1")
+    fun getDestroyedTasks(): LiveData<List<TaskEntry>>
 }

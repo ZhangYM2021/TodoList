@@ -48,7 +48,7 @@ class DeletedFragment: Fragment() {
             binding.deletedView.adapter = adapter
         }
 
-        /*ItemTouchHelper(object  : ItemTouchHelper.SimpleCallback(0,
+        ItemTouchHelper(object  : ItemTouchHelper.SimpleCallback(0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -61,18 +61,18 @@ class DeletedFragment: Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val taskEntry = adapter.currentList[position]
-                viewModel.delete(taskEntry)
-                taskEntry.deleted = true
+                taskEntry.destroyed = true
+                viewModel.update(taskEntry)
 
                 Snackbar.make(binding.root, "Deleted!", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo"){
                         viewModel.insert(taskEntry)
-                        taskEntry.deleted = false
+                        taskEntry.destroyed = false
                     }
                     show()
                 }
             }
-        }).attachToRecyclerView(binding.deletedView)*/
+        }).attachToRecyclerView(binding.deletedView)
 
         //setHasOptionsMenu(true)
 

@@ -17,13 +17,17 @@ class TaskViewModel(application: Application) : AndroidViewModel(application){
 
     val getAllTasks: LiveData<List<TaskEntry>>
     val getDeletedTasks: LiveData<List<TaskEntry>>
+    val getDestroyedTasks: LiveData<List<TaskEntry>>
     val getAllPriorityTasks: LiveData<List<TaskEntry>>
+    val timeOrder: LiveData<List<TaskEntry>>
 
     init {
         repository = TaskRepository(taskDao)
         getAllTasks = repository.getAllTasks()
         getDeletedTasks = repository.getDeletedTasks()
+        getDestroyedTasks = repository.getDestroyedTasks()
         getAllPriorityTasks = repository.getAllPriorityTasks()
+        timeOrder = repository.timeOrder()
     }
 
     fun insert(taskEntry: TaskEntry){

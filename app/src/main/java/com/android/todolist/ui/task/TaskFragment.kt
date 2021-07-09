@@ -70,13 +70,13 @@ class TaskFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val taskEntry = adapter.currentList[position]
-                taskEntry.deleted = true
+                taskEntry.destroyed = true
                 viewModel.update(taskEntry)
 
                 Snackbar.make(binding.root, "Deleted!", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo"){
                         viewModel.insert(taskEntry)
-                        taskEntry.deleted = false
+                        taskEntry.destroyed = false
                     }
                     show()
                 }
@@ -131,6 +131,10 @@ class TaskFragment : Fragment() {
                     adapter.submitList(tasks)
                 })
             R.id.action_delete_all -> deleteAllItem()
+            R.id.action_time -> viewModel.timeOrder.observe(viewLifecycleOwner,
+                { tasks ->
+                    adapter.submitList(tasks)
+                })
         }
         return super.onOptionsItemSelected(item)
     }

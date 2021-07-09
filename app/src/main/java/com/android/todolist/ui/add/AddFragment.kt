@@ -1,7 +1,10 @@
 package com.android.todolist.ui.add
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -22,6 +25,28 @@ import java.util.*
 class AddFragment : Fragment() {
 
     private val viewModel: TaskViewModel by viewModels()
+    private val mAlarmManager: AlarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    private val calendar: Calendar = Calendar.getInstance()
+
+    companion object {
+        class AlarmData(var time: Long = 0,
+                        var date: Calendar = Calendar.getInstance(),
+                        private var timeLabel: String = "") {
+            init {
+                date.timeInMillis = time
+                timeLabel = "${date.get(Calendar.YEAR)}.${date.get(Calendar.MONTH) + 1}" +
+                        ".${date.get(Calendar.DAY_OF_MONTH)} ${date.get(Calendar.HOUR_OF_DAY)}:${date.get(Calendar.MINUTE)}"
+            }
+
+            override fun toString(): String {
+                return timeLabel
+            }
+
+            fun getId(): Int {
+                return (time / (1000 * 60)).toInt()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +75,8 @@ class AddFragment : Fragment() {
                 val title_str = edtTask.text.toString()
                 val priority = spinner.selectedItemPosition
                 val type = type.selectedItemPosition
+                val AlarmTime = "${calendar.get(Calendar.YEAR)}.${calendar.get(Calendar.MONTH) + 1}" +
+                        ".${calendar.get(Calendar.DAY_OF_MONTH)} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
 
                 val taskEntry = TaskEntry(
                     0,
@@ -58,19 +85,33 @@ class AddFragment : Fragment() {
                     type,
                     System.currentTimeMillis(),
                     deleted = false,
+                    destroyed = false,
+                    AlarmTime
                 )
 
                 viewModel.insert(taskEntry)
                 Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addFragment_to_taskFragment)
+                //val intent = Intent(".Alarm.AlarmReceiver")
+                //sendBroadcast(intent)
+                Intent().also { intent ->
+                    intent.setAction(".Alarm.AlarmReceiver")
+                    sendBroadcast(intent)
+                }
             }
         }
 
         return binding.root
     }
 
+    private fun sendBroadcast(intent: Intent) {
+
+        sendBroadcast(intent)
+
+    }
+
     private fun setAlarm() {
-        Calendar.getInstance().apply {
+        calendar.apply {
             this.set(Calendar.SECOND, 0)
             this.set(Calendar.MILLISECOND, 0)
             context?.let {

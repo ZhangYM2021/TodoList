@@ -14,5 +14,7 @@ data class TaskEntry(
     var priority: Int,
     var type: Int,
     var timestamp: Long,
-    var deleted: Boolean = false
+    var deleted: Boolean = false,
+    var destroyed: Boolean = false,
+    var alarmTime: String
 ) : Parcelable

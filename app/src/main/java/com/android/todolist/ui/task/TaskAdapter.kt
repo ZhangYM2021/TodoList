@@ -59,8 +59,8 @@ class TaskAdapter(private val clickListener: TaskClickListener, val deleteListen
             setOnClickListener {
                 holder.binding.apply {
                     if (isChecked) {
-                        deleteListener(current)
-                        //taskEntry.deleted = true
+                        //deleteListener(current)
+                        taskEntry.deleted = true
                         taskTitle.paintFlags =
                                 taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 

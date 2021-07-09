@@ -20,9 +20,13 @@ class TaskRepository(val taskDao: TaskDao) {
 
     fun getDeletedTasks() : LiveData<List<TaskEntry>> = taskDao.getDeletedTasks()
 
+    fun getDestroyedTasks() : LiveData<List<TaskEntry>> = taskDao.getDestroyedTasks()
+
     fun getAllPriorityTasks() : LiveData<List<TaskEntry>> = taskDao.getAllPriorityTasks()
 
     fun searchDatabase(searchQuery: String): LiveData<List<TaskEntry>> {
         return taskDao.searchDatabase(searchQuery)
     }
+
+    fun timeOrder(): LiveData<List<TaskEntry>> = taskDao.timeOrder()
 }
